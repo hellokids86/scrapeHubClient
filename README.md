@@ -19,7 +19,7 @@ python -m venv .venv
 
 ### 2. Install dependencies
 ```bash
-# Make sure virtual environment is activated first
+# Make sure virtual environment is activated first (windows)
 .venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
