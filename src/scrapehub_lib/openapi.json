@@ -1,0 +1,1404 @@
+{
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"VersionResponse": {
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"version": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"success",
+					"version"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Record_string.any_": {
+				"properties": {},
+				"additionalProperties": {},
+				"type": "object",
+				"description": "Construct a type with a set of properties K of type T"
+			},
+			"UserSettingsResponse": {
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"properties": {
+							"scraperAssignments": {
+								"items": {
+									"type": "string"
+								},
+								"type": "array"
+							},
+							"roles": {
+								"items": {
+									"type": "string"
+								},
+								"type": "array"
+							},
+							"settings": {
+								"$ref": "#/components/schemas/Record_string.any_"
+							},
+							"fullname": {
+								"type": "string"
+							},
+							"email": {
+								"type": "string"
+							},
+							"username": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"roles",
+							"email",
+							"username"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"success",
+					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ErrorResponse": {
+				"description": "Standard error response format for all API endpoints",
+				"properties": {
+					"success": {
+						"type": "boolean",
+						"enum": [
+							false
+						],
+						"nullable": false
+					},
+					"code": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"traceId": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"success",
+					"code",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateProgressResponse": {
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"sessionId": {
+						"type": "string"
+					},
+					"scrapeSessionUpdateId": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"success",
+					"sessionId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateType": {
+				"type": "string",
+				"enum": [
+					"progress"
+				],
+				"nullable": false,
+				"description": "Allowed kinds of progress updates"
+			},
+			"UpdateProgressRequest": {
+				"description": "Progress update payload",
+				"properties": {
+					"successCount": {
+						"type": "integer",
+						"format": "int32",
+						"minimum": 0
+					},
+					"errorCount": {
+						"type": "integer",
+						"format": "int32",
+						"minimum": 0
+					},
+					"warningCount": {
+						"type": "integer",
+						"format": "int32",
+						"minimum": 0
+					},
+					"message": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 500
+					},
+					"totalCount": {
+						"type": "integer",
+						"format": "int32",
+						"minimum": 0
+					},
+					"updateType": {
+						"$ref": "#/components/schemas/UpdateType",
+						"description": "Constrained by a string-literal union = enum in OpenAPI"
+					}
+				},
+				"required": [
+					"successCount",
+					"errorCount",
+					"warningCount",
+					"message",
+					"totalCount",
+					"updateType"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"StartScrapeResponse": {
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"sessionId": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"success",
+					"sessionId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ScraperProfileResponse": {
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"properties": {
+							"cron": {
+								"type": "string"
+							},
+							"assignedTo": {
+								"items": {
+									"type": "string"
+								},
+								"type": "array"
+							},
+							"settings": {
+								"$ref": "#/components/schemas/Record_string.any_"
+							},
+							"password": {
+								"type": "string"
+							},
+							"username": {
+								"type": "string"
+							},
+							"notes": {
+								"type": "string"
+							},
+							"disabledDate": {
+								"type": "string"
+							},
+							"isDisabled": {
+								"type": "boolean"
+							},
+							"type": {
+								"type": "string"
+							},
+							"description": {
+								"type": "string"
+							},
+							"name": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"isDisabled",
+							"type",
+							"name"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"success",
+					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"DefaultSelection_Prisma._36_ScrapeSessionErrorLogPayload_": {
+				"properties": {
+					"context": {
+						"type": "string"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"details": {
+						"type": "string"
+					},
+					"stackTrace": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"severity": {
+						"type": "string"
+					},
+					"errorType": {
+						"type": "string"
+					},
+					"sessionId": {
+						"type": "string"
+					},
+					"id": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"context",
+					"createdAt",
+					"details",
+					"stackTrace",
+					"message",
+					"severity",
+					"errorType",
+					"sessionId",
+					"id"
+				],
+				"type": "object"
+			},
+			"ScrapeSessionErrorLog": {
+				"$ref": "#/components/schemas/DefaultSelection_Prisma._36_ScrapeSessionErrorLogPayload_",
+				"description": "Model ScrapeSessionErrorLog"
+			},
+			"RecordErrorResponse": {
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"$ref": "#/components/schemas/ScrapeSessionErrorLog"
+					}
+				},
+				"required": [
+					"success",
+					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Pick_ScrapeSessionErrorLog.Exclude_keyofScrapeSessionErrorLog.id-or-createdAt__": {
+				"properties": {
+					"sessionId": {
+						"type": "string"
+					},
+					"errorType": {
+						"type": "string"
+					},
+					"severity": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"stackTrace": {
+						"type": "string"
+					},
+					"details": {
+						"type": "string"
+					},
+					"context": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"sessionId",
+					"errorType",
+					"severity",
+					"message",
+					"stackTrace",
+					"details",
+					"context"
+				],
+				"type": "object",
+				"description": "From T, pick a set of properties whose keys are in the union K"
+			},
+			"Omit_ScrapeSessionErrorLog.id-or-createdAt_": {
+				"$ref": "#/components/schemas/Pick_ScrapeSessionErrorLog.Exclude_keyofScrapeSessionErrorLog.id-or-createdAt__",
+				"description": "Construct a type with the properties of T except for those in type K."
+			},
+			"RecordErrorRequest": {
+				"properties": {
+					"error": {
+						"$ref": "#/components/schemas/Omit_ScrapeSessionErrorLog.id-or-createdAt_"
+					}
+				},
+				"required": [
+					"error"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"RecordDataResponse": {
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"recordsProcessed": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"success",
+					"recordsProcessed"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"RecordType": {
+				"type": "string",
+				"enum": [
+					"CHILD_PRODUCT",
+					"PARENT_PRODUCT",
+					"FREE_DATA"
+				]
+			},
+			"ChildProductInput": {
+				"properties": {
+					"scrapeSessionId": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 36
+					},
+					"sku": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 255
+					},
+					"parentSku": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 255
+					},
+					"barcode": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 255
+					},
+					"key": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 255
+					},
+					"keyName": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 255
+					},
+					"brand": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 255
+					},
+					"vendor": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 255
+					},
+					"style": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 255
+					},
+					"color": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 255
+					},
+					"size1": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 255
+					},
+					"size2": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 255
+					},
+					"availableDate": {
+						"type": "string",
+						"format": "date-time",
+						"nullable": true
+					},
+					"cost": {
+						"type": "number",
+						"format": "double",
+						"nullable": true,
+						"minimum": 0
+					},
+					"msrp": {
+						"type": "number",
+						"format": "double",
+						"nullable": true,
+						"minimum": 0
+					},
+					"mapPrice": {
+						"type": "number",
+						"format": "double",
+						"nullable": true,
+						"minimum": 0
+					},
+					"isCloseout": {
+						"type": "boolean"
+					},
+					"images": {
+						"type": "string",
+						"nullable": true
+					},
+					"url": {
+						"type": "string",
+						"nullable": true
+					},
+					"metafields": {
+						"type": "string",
+						"nullable": true
+					},
+					"data": {
+						"type": "string",
+						"nullable": true
+					}
+				},
+				"required": [
+					"scrapeSessionId",
+					"key"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ParentProductInput": {
+				"properties": {
+					"scrapeSessionId": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 36
+					},
+					"parentSku": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 255
+					},
+					"brand": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 255
+					},
+					"vendor": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 255
+					},
+					"style": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 255
+					},
+					"model": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 255
+					},
+					"title": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 255
+					},
+					"description": {
+						"type": "string",
+						"nullable": true
+					},
+					"bullets": {
+						"type": "string",
+						"nullable": true
+					},
+					"category": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 255
+					},
+					"subCategory": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 255
+					},
+					"department": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 255
+					},
+					"season": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 255
+					},
+					"images": {
+						"type": "string",
+						"nullable": true
+					},
+					"url": {
+						"type": "string",
+						"nullable": true
+					},
+					"metafields": {
+						"type": "string",
+						"nullable": true
+					},
+					"data": {
+						"type": "string",
+						"nullable": true
+					}
+				},
+				"required": [
+					"scrapeSessionId",
+					"parentSku"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"FreeDataInput": {
+				"properties": {
+					"scrapeSessionId": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 36
+					},
+					"key": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 255
+					},
+					"keyName": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 255
+					},
+					"metafields": {
+						"type": "string",
+						"nullable": true
+					},
+					"data": {
+						"type": "string",
+						"nullable": true
+					}
+				},
+				"required": [
+					"scrapeSessionId",
+					"key"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"DataRecord": {
+				"properties": {
+					"recordType": {
+						"$ref": "#/components/schemas/RecordType"
+					},
+					"version": {
+						"type": "string"
+					},
+					"childProduct": {
+						"$ref": "#/components/schemas/ChildProductInput"
+					},
+					"parentProduct": {
+						"$ref": "#/components/schemas/ParentProductInput"
+					},
+					"freeData": {
+						"$ref": "#/components/schemas/FreeDataInput"
+					}
+				},
+				"required": [
+					"recordType",
+					"version"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"RecordDataRequest": {
+				"properties": {
+					"sessionId": {
+						"type": "string"
+					},
+					"records": {
+						"items": {
+							"$ref": "#/components/schemas/DataRecord"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"sessionId",
+					"records"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"MessageType": {
+				"type": "string",
+				"enum": [
+					"KILL_REQUEST",
+					"START"
+				]
+			},
+			"ScraperMessageResponse": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"scraperId": {
+						"type": "string"
+					},
+					"scraperName": {
+						"type": "string"
+					},
+					"messageType": {
+						"$ref": "#/components/schemas/MessageType"
+					},
+					"message": {
+						"type": "string"
+					},
+					"createdAt": {
+						"type": "string"
+					},
+					"expiresAt": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"scraperId",
+					"scraperName",
+					"messageType",
+					"createdAt"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"GetMessagesResponse": {
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"messages": {
+						"items": {
+							"$ref": "#/components/schemas/ScraperMessageResponse"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"success",
+					"messages"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"SendMessageResponse": {
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"messageId": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"success",
+					"messageId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"SendMessageRequest": {
+				"properties": {
+					"scraperName": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 100
+					},
+					"messageType": {
+						"$ref": "#/components/schemas/MessageType"
+					},
+					"message": {
+						"type": "string"
+					},
+					"expiresAt": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"scraperName",
+					"messageType"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AckMessageResponse": {
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"acknowledgedAt": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"success",
+					"acknowledgedAt"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AckMessageRequest": {
+				"properties": {
+					"messageId": {
+						"type": "string",
+						"minLength": 1
+					}
+				},
+				"required": [
+					"messageId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CompleteScrapeResponse": {
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"sessionId": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"success",
+					"sessionId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CompleteScrapeRequest": {
+				"properties": {
+					"successCount": {
+						"type": "integer",
+						"format": "int32",
+						"minimum": 0
+					},
+					"errorCount": {
+						"type": "integer",
+						"format": "int32",
+						"minimum": 0
+					},
+					"warningCount": {
+						"type": "integer",
+						"format": "int32",
+						"minimum": 0
+					},
+					"message": {
+						"type": "string",
+						"maxLength": 1000
+					},
+					"statusCode": {
+						"type": "string",
+						"enum": [
+							"SUCCESS",
+							"FAILED",
+							"KILL_REQUEST"
+						]
+					}
+				},
+				"required": [
+					"successCount",
+					"errorCount",
+					"warningCount",
+					"statusCode"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {
+			"api_key": {
+				"type": "apiKey",
+				"name": "x-api-key",
+				"in": "header"
+			}
+		}
+	},
+	"info": {
+		"title": "ScrapeHub API",
+		"version": "1.0.0",
+		"description": "API for managing web scrapers",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {}
+	},
+	"paths": {
+		"/version": {
+			"get": {
+				"operationId": "GetVersion",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/VersionResponse"
+								}
+							}
+						}
+					}
+				},
+				"description": "Get the current API version",
+				"tags": [
+					"ScrapeHub API"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": []
+			}
+		},
+		"/userSettings": {
+			"get": {
+				"operationId": "GetUserSettings",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/UserSettingsResponse"
+										},
+										{
+											"$ref": "#/components/schemas/ErrorResponse"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"description": "Get the authenticated user's settings",
+				"tags": [
+					"ScrapeHub API"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": []
+			}
+		},
+		"/updateProgress/{sessionId}": {
+			"post": {
+				"operationId": "UpdateProgress",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/UpdateProgressResponse"
+										},
+										{
+											"$ref": "#/components/schemas/ErrorResponse"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"description": "Update progress for a scrape session",
+				"tags": [
+					"Scraping Operations"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "The UUID of the scrape session",
+						"in": "path",
+						"name": "sessionId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateProgressRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/startScrape": {
+			"post": {
+				"operationId": "StartScrape",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/StartScrapeResponse"
+										},
+										{
+											"$ref": "#/components/schemas/ErrorResponse"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"description": "Start a new scrape session",
+				"tags": [
+					"Scraping Operations"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "The name of the scraper to run",
+						"in": "query",
+						"name": "name",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"description": "Free-form JSON data to pass to the scraper",
+					"required": false,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Record_string.any_",
+								"description": "Free-form JSON data to pass to the scraper"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/scraperProfile": {
+			"get": {
+				"operationId": "GetScraperProfile",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/ScraperProfileResponse"
+										},
+										{
+											"$ref": "#/components/schemas/ErrorResponse"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"description": "Get a scraper profile by name",
+				"tags": [
+					"ScrapeHub API"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "The name of the scraper",
+						"in": "query",
+						"name": "name",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/recordError": {
+			"post": {
+				"operationId": "RecordError",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/RecordErrorResponse"
+										},
+										{
+											"$ref": "#/components/schemas/ErrorResponse"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"description": "Record an error for a scraping session",
+				"tags": [
+					"Scraping Operations"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/RecordErrorRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/recordData": {
+			"post": {
+				"operationId": "RecordData",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/RecordDataResponse"
+										},
+										{
+											"$ref": "#/components/schemas/ErrorResponse"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"description": "Record scraped data for a session",
+				"tags": [
+					"Scraping Operations"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/RecordDataRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/getMessages": {
+			"get": {
+				"operationId": "GetMessages",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/GetMessagesResponse"
+										},
+										{
+											"$ref": "#/components/schemas/ErrorResponse"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"description": "Get all unacknowledged and non-expired messages for the authenticated user",
+				"tags": [
+					"ScrapeHub API - Messaging"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "Optional scraper name to filter messages",
+						"in": "query",
+						"name": "scraperName",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/sendMessage": {
+			"post": {
+				"operationId": "SendMessage",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/SendMessageResponse"
+										},
+										{
+											"$ref": "#/components/schemas/ErrorResponse"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"description": "Send a message to a scraper\r\nUser must be assigned to the scraper or have admin role",
+				"tags": [
+					"ScrapeHub API - Messaging"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/SendMessageRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/ackMessage": {
+			"post": {
+				"operationId": "AckMessage",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/AckMessageResponse"
+										},
+										{
+											"$ref": "#/components/schemas/ErrorResponse"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"description": "Acknowledge a message by its ID",
+				"tags": [
+					"ScrapeHub API - Messaging"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AckMessageRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/completeScrape/{sessionId}": {
+			"post": {
+				"operationId": "CompleteScrape",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/CompleteScrapeResponse"
+										},
+										{
+											"$ref": "#/components/schemas/ErrorResponse"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"description": "Mark a scrape session as completed",
+				"tags": [
+					"Scraping Operations"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "The UUID of the scrape session",
+						"in": "path",
+						"name": "sessionId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CompleteScrapeRequest"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/scrapehub/api"
+		}
+	]
+}
