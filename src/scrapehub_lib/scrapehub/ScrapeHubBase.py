@@ -32,13 +32,13 @@ except ImportError:
     from KillRequestedException import KillRequestedException
     import ScrapeHubRunner
 
-from ..scrapehub_client import ApiClient, Configuration
-from ..scrapehub_client.api import (
+from scrapehub_client import ApiClient, Configuration
+from scrapehub_client.api import (
     scraping_operations_api,
     scrape_hub_api_messaging_api,
     scrape_hub_api_api
 )
-from ..scrapehub_client.models import (
+from scrapehub_client.models import (
     UpdateProgressRequest,
     UpdateType,
     CompleteScrapeRequest,
@@ -55,7 +55,7 @@ from ..scrapehub_client.models import (
 )
 from typing import Union
 
-from ..scrapehub_client.models.pick_scrape_session_error_log_exclude_keyof_scrape_session_error_log_id_or_created_at import PickScrapeSessionErrorLogExcludeKeyofScrapeSessionErrorLogIdOrCreatedAt
+from scrapehub_client.models.pick_scrape_session_error_log_exclude_keyof_scrape_session_error_log_id_or_created_at import PickScrapeSessionErrorLogExcludeKeyofScrapeSessionErrorLogIdOrCreatedAt
 
 
 class ScrapeHubBase:

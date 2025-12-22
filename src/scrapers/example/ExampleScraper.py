@@ -1,7 +1,8 @@
 import sys
 import os
-# Add the project root to the path so we can import the scrapehubpyrobot module
+# Add the project root and scrapehub_lib to the path so we can import the scrapehub_lib module
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../src/scrapehub_lib')))
 
 import json
 import time

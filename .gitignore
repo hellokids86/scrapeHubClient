@@ -1,3 +1,4 @@
 .env
 logs/*
 .venv/*
+src/scrapehub_lib/scrapehub_client/__pycache__*

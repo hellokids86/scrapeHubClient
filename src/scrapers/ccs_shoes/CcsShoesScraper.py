@@ -6,9 +6,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../.
 import json
 import time
 import requests
-from scrapehubpyrobot.scrapehub.CompleteScrapeInput import CompleteScrapeInput
-from scrapehubpyrobot.scrapehub.ScrapeHubBase import ScrapeHubBase
-from scrapehubpyrobot.scrapehub.ScrapeHubRunner import ScrapeHubRunner
+from src.scrapehub_lib.scrapehub import CompleteScrapeInput, ScrapeHubBase, ScrapeHubRunner
 
 scraperName = "ccs"
 
