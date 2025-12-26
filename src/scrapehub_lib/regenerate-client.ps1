@@ -5,25 +5,9 @@ Write-Host "ScraperHub Client Regenerator" -ForegroundColor Cyan
 Write-Host ("=" * 50) -ForegroundColor Cyan
 Write-Host ""
 
-# get the host from the .env file if it exists
-$envFilePath = ".env"
 
-
-
-# Step 1: Download the latest OpenAPI specification
-Write-Host "Step 1: Downloading OpenAPI specification..." -ForegroundColor Yellow
-try {
-    Invoke-WebRequest -Uri "http://localhost:3000/docs/scrapehub/openapi.json" -OutFile "openapi.json"
-    Write-Host "OpenAPI spec downloaded successfully" -ForegroundColor Green
-} catch {
-    Write-Host "Failed to download OpenAPI spec: $_" -ForegroundColor Red
-    exit 1
-}
-
-Write-Host ""
-
-# Step 2: Generate the Python client
-Write-Host "Step 2: Generating Python client..." -ForegroundColor Yellow
+# Step 1: Generate the Python client
+Write-Host "Step 1: Generating Python client..." -ForegroundColor Yellow
 Write-Host "This may take a moment..." -ForegroundColor Gray
 Write-Host ""
 

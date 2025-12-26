@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
 from typing import Optional, Set
@@ -33,11 +33,14 @@ class ChildProductInput(BaseModel):
     parent_sku: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, alias="parentSku")
     barcode: Optional[Annotated[str, Field(strict=True, max_length=255)]] = None
     key: Annotated[str, Field(min_length=1, strict=True, max_length=255)]
-    key_name: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, alias="keyName")
+    key_name: Annotated[str, Field(strict=True, max_length=255)] = Field(alias="keyName")
     brand: Optional[Annotated[str, Field(strict=True, max_length=255)]] = None
     vendor: Optional[Annotated[str, Field(strict=True, max_length=255)]] = None
     style: Optional[Annotated[str, Field(strict=True, max_length=255)]] = None
     color: Optional[Annotated[str, Field(strict=True, max_length=255)]] = None
+    colorcode: Optional[Annotated[str, Field(strict=True, max_length=255)]] = None
+    title: Optional[StrictStr] = None
+    material: Optional[Annotated[str, Field(strict=True, max_length=255)]] = None
     size1: Optional[Annotated[str, Field(strict=True, max_length=255)]] = None
     size2: Optional[Annotated[str, Field(strict=True, max_length=255)]] = None
     available_date: Optional[datetime] = Field(default=None, alias="availableDate")
@@ -49,7 +52,14 @@ class ChildProductInput(BaseModel):
     url: Optional[StrictStr] = None
     metafields: Optional[StrictStr] = None
     data: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["scrapeSessionId", "sku", "parentSku", "barcode", "key", "keyName", "brand", "vendor", "style", "color", "size1", "size2", "availableDate", "cost", "msrp", "mapPrice", "isCloseout", "images", "url", "metafields", "data"]
+    __properties: ClassVar[List[str]] = ["scrapeSessionId", "sku", "parentSku", "barcode", "key", "keyName", "brand", "vendor", "style", "color", "colorcode", "title", "material", "size1", "size2", "availableDate", "cost", "msrp", "mapPrice", "isCloseout", "images", "url", "metafields", "data"]
+
+    @field_validator('key_name')
+    def key_name_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['sku', 'gtin', 'vendorsku']):
+            raise ValueError("must be one of enum values ('sku', 'gtin', 'vendorsku')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -105,11 +115,6 @@ class ChildProductInput(BaseModel):
         if self.barcode is None and "barcode" in self.model_fields_set:
             _dict['barcode'] = None
 
-        # set to None if key_name (nullable) is None
-        # and model_fields_set contains the field
-        if self.key_name is None and "key_name" in self.model_fields_set:
-            _dict['keyName'] = None
-
         # set to None if brand (nullable) is None
         # and model_fields_set contains the field
         if self.brand is None and "brand" in self.model_fields_set:
@@ -129,6 +134,21 @@ class ChildProductInput(BaseModel):
         # and model_fields_set contains the field
         if self.color is None and "color" in self.model_fields_set:
             _dict['color'] = None
+
+        # set to None if colorcode (nullable) is None
+        # and model_fields_set contains the field
+        if self.colorcode is None and "colorcode" in self.model_fields_set:
+            _dict['colorcode'] = None
+
+        # set to None if title (nullable) is None
+        # and model_fields_set contains the field
+        if self.title is None and "title" in self.model_fields_set:
+            _dict['title'] = None
+
+        # set to None if material (nullable) is None
+        # and model_fields_set contains the field
+        if self.material is None and "material" in self.model_fields_set:
+            _dict['material'] = None
 
         # set to None if size1 (nullable) is None
         # and model_fields_set contains the field
@@ -202,6 +222,9 @@ class ChildProductInput(BaseModel):
             "vendor": obj.get("vendor"),
             "style": obj.get("style"),
             "color": obj.get("color"),
+            "colorcode": obj.get("colorcode"),
+            "title": obj.get("title"),
+            "material": obj.get("material"),
             "size1": obj.get("size1"),
             "size2": obj.get("size2"),
             "availableDate": obj.get("availableDate"),

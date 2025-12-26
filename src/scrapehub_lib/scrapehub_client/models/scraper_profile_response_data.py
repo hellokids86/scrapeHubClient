@@ -26,6 +26,7 @@ class ScraperProfileResponseData(BaseModel):
     """
     ScraperProfileResponseData
     """ # noqa: E501
+    publish_inventory: StrictBool = Field(alias="publishInventory")
     cron: Optional[StrictStr] = None
     assigned_to: Optional[List[StrictStr]] = Field(default=None, alias="assignedTo")
     settings: Optional[Dict[str, Any]] = Field(default=None, description="Construct a type with a set of properties K of type T")
@@ -37,7 +38,7 @@ class ScraperProfileResponseData(BaseModel):
     type: StrictStr
     description: Optional[StrictStr] = None
     name: StrictStr
-    __properties: ClassVar[List[str]] = ["cron", "assignedTo", "settings", "password", "username", "notes", "disabledDate", "isDisabled", "type", "description", "name"]
+    __properties: ClassVar[List[str]] = ["publishInventory", "cron", "assignedTo", "settings", "password", "username", "notes", "disabledDate", "isDisabled", "type", "description", "name"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,6 +91,7 @@ class ScraperProfileResponseData(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "publishInventory": obj.get("publishInventory"),
             "cron": obj.get("cron"),
             "assignedTo": obj.get("assignedTo"),
             "settings": obj.get("settings"),

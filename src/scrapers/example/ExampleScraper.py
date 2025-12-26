@@ -43,6 +43,7 @@ class MyScraperRunner(ScrapeHubRunner):
             {
                 "scrape_session_id": self.session_id,
                 "key": "PRODUCT-001",
+                "key_name": "sku",
                 "sku": "SKU-001",
                 "brand": "Example Brand",
                 "title": "Example Product 1",
@@ -57,6 +58,7 @@ class MyScraperRunner(ScrapeHubRunner):
                 "scrape_session_id": self.session_id,
                 "key": "PRODUCT-002",
                 "sku": "SKU-002",
+                "key_name": "sku",
                 "brand": "Example Brand",
                 "title": "Example Product 2",
                 "color": "Red",

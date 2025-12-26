@@ -213,6 +213,9 @@
 					},
 					"data": {
 						"properties": {
+							"publishInventory": {
+								"type": "boolean"
+							},
 							"cron": {
 								"type": "string"
 							},
@@ -251,6 +254,7 @@
 							}
 						},
 						"required": [
+							"publishInventory",
 							"isDisabled",
 							"type",
 							"name"
@@ -442,7 +446,11 @@
 					},
 					"keyName": {
 						"type": "string",
-						"nullable": true,
+						"enum": [
+							"sku",
+							"gtin",
+							"vendorsku"
+						],
 						"maxLength": 255
 					},
 					"brand": {
@@ -461,6 +469,20 @@
 						"maxLength": 255
 					},
 					"color": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 255
+					},
+					"colorcode": {
+						"type": "string",
+						"nullable": true,
+						"maxLength": 255
+					},
+					"title": {
+						"type": "string",
+						"nullable": true
+					},
+					"material": {
 						"type": "string",
 						"nullable": true,
 						"maxLength": 255
@@ -520,7 +542,8 @@
 				},
 				"required": [
 					"scrapeSessionId",
-					"key"
+					"key",
+					"keyName"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -784,9 +807,6 @@
 						"$ref": "#/components/schemas/MessageType"
 					},
 					"message": {
-						"type": "string"
-					},
-					"expiresAt": {
 						"type": "string"
 					}
 				},
@@ -1187,7 +1207,7 @@
 						}
 					}
 				},
-				"description": "Record scraped data for a session",
+				"description": "Record scraped data for a session. You can send up to 2000 records in a single request.",
 				"tags": [
 					"Scraping Operations"
 				],

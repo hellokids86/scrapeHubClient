@@ -31,8 +31,7 @@ class SendMessageRequest(BaseModel):
     scraper_name: Annotated[str, Field(min_length=1, strict=True, max_length=100)] = Field(alias="scraperName")
     message_type: MessageType = Field(alias="messageType")
     message: Optional[StrictStr] = None
-    expires_at: Optional[StrictStr] = Field(default=None, alias="expiresAt")
-    __properties: ClassVar[List[str]] = ["scraperName", "messageType", "message", "expiresAt"]
+    __properties: ClassVar[List[str]] = ["scraperName", "messageType", "message"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,8 +86,7 @@ class SendMessageRequest(BaseModel):
         _obj = cls.model_validate({
             "scraperName": obj.get("scraperName"),
             "messageType": obj.get("messageType"),
-            "message": obj.get("message"),
-            "expiresAt": obj.get("expiresAt")
+            "message": obj.get("message")
         })
         return _obj
 

@@ -355,7 +355,7 @@ class ScrapingOperationsApi:
     ) -> RecordData200Response:
         """record_data
 
-        Record scraped data for a session
+        Record scraped data for a session. You can send up to 2000 records in a single request.
 
         :param record_data_request: (required)
         :type record_data_request: RecordDataRequest
@@ -422,7 +422,7 @@ class ScrapingOperationsApi:
     ) -> ApiResponse[RecordData200Response]:
         """record_data
 
-        Record scraped data for a session
+        Record scraped data for a session. You can send up to 2000 records in a single request.
 
         :param record_data_request: (required)
         :type record_data_request: RecordDataRequest
@@ -489,7 +489,7 @@ class ScrapingOperationsApi:
     ) -> RESTResponseType:
         """record_data
 
-        Record scraped data for a session
+        Record scraped data for a session. You can send up to 2000 records in a single request.
 
         :param record_data_request: (required)
         :type record_data_request: RecordDataRequest
