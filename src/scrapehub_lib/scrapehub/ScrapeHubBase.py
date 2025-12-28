@@ -189,8 +189,15 @@ class ScrapeHubBase:
         
         # Set API keys using the security scheme names from the OpenAPI spec
         # These map to headers: api_key -> x-api-key, api_username -> x-api-username
+
+
+        if not os.getenv('SCRAPEHUB_API_HOST'):
+            raise ValueError(
+                "Missing required environment variables: SCRAPEHUB_API_HOST \n"
+                "Please set them in your .env file or environment."
+            )
         configuration.api_key['api_key'] = api_key
-        configuration.host = os.getenv('SCRAPEHUB_API_HOST', 'https://scrapehub.unxplrd.com/scrapehub/api')
+        configuration.host = os.getenv('SCRAPEHUB_API_HOST')
         
         self.api_client = ApiClient(configuration)
         self.scraping_api = scraping_operations_api.ScrapingOperationsApi(self.api_client)
